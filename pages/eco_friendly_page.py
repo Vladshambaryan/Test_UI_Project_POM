@@ -1,37 +1,44 @@
+from anyio import sleep
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from pages.locators import sale_locators as loc
+from pages.locators import eco_friendly_locator as ecoloc
 from pages.base_page import BasePage
 
 
-class SalePage(BasePage):
-    page_url = 'sale.html#'
-    bags_url = 'gear/bags.html'
-    jacket_url = 'women/tops-women/jackets-women.html?product_list_order=price"'
-    shorts_url = 'men/bottoms-men/shorts-men.html'
+class EcoFriendly(BasePage):
+    page_url = 'collections/eco-friendly.html'
 
-    def open_page_bag(self):
-        self.driver.get(f'{self.base_url}/{self.bags_url}')
+    def open_page_eco_friendly(self):
+        self.driver.get(f'{self.base_url}/{self.page_url}')
 
-    def open_page_jacket(self):
-        self.driver.get(f'{self.base_url}/{self.jacket_url}')
+    def select_product(self):
+        short = self.find(ecoloc.short_loc)
+        short.click()
+        size = self.find(ecoloc.size_loc)
+        size.click()
+        color = self.find(ecoloc.color_loc)
+        color.click()
+        add_to_cart = self.find(ecoloc.add_to_cart_loc)
+        add_to_cart.click()
 
-    def open_page_shorts(self):
-        self.driver.get(f'{self.base_url}/{self.shorts_url}')
+    def find_product_in_cart(self):
+        WebDriverWait(self.driver, 5).until(
+            EC.text_to_be_present_in_element((By.XPATH, "//span[@class='counter-number']"), '1'))
+        self.find(ecoloc.counter_loc)
+        count = self.find(ecoloc.counter_loc)
+        count.click()
+        view = self.find(ecoloc.view_loc)
+        view.click()
 
-    def click_jacket(self):
-        jacket = self.find(loc.jacket_loc)
-        jacket.click()
+    def check_product_in_cart(self, text):
+        short1 = self.find(ecoloc.short1_loc)
+        assert short1.text == text
 
-    def check_title(self, text):
-        page_title = self.find(loc.page_title_loc)
-        assert page_title.text == text
-
-    def click_bags(self):
-        bags = self.find(loc.bags_loc)
-        bags.click()
-
-    def check_bags_title(self, text):
-        title = self.find(loc.title_loc)
-        assert title.text == text
+    def delete_product(self):
+        delete = self.find(ecoloc.delete_loc)
+        delete.click()
 
     def check_product_count(self):
         products = self.find_all(loc.products_loc)

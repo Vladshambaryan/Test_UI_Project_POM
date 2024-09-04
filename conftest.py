@@ -4,6 +4,7 @@ from pages.add_to_cart import AddToCart
 from pages.create_account_page import CreateAccount
 from pages.sing_in import LoginPage
 from pages.sale_page import SalePage
+from pages.eco_friendly_page import EcoFriendly
 import pytest
 
 
@@ -36,3 +37,8 @@ def add_to_cart(driver):
 @pytest.fixture()
 def create_account_page(driver):
     return CreateAccount(driver)
+
+
+@pytest.fixture()
+def eco_friendly_page(driver):
+    return EcoFriendly(driver)

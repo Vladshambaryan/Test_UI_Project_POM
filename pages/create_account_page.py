@@ -19,9 +19,9 @@ class CreateAccount(BasePage):
         conf_password.send_keys('12345678mM+$VV')
         button.click()
 
-    def check_error_message_first_name(self):
+    def check_error_message_first_name(self, text):
         error = self.find(locc.error_loc)
-        assert error.text == 'First Name is not valid!'
+        assert error.text == text
 
     def incorrect_last_name(self):
         first = self.find(locc.first_loc)
@@ -37,9 +37,9 @@ class CreateAccount(BasePage):
         conf_password.send_keys('12345678mM+$VV')
         button.click()
 
-    def check_error_message_last_name(self):
+    def check_error_message_last_name(self, text):
         error = self.find(locc.error_ln_loc)
-        assert error.text == 'Last Name is not valid!'
+        assert error.text == text
 
     def incorrect_first_last_name(self):
         first = self.find(locc.first_loc)
@@ -55,11 +55,11 @@ class CreateAccount(BasePage):
         conf_password.send_keys('12345678mM+$VV')
         button.click()
 
-    def check_error_message_first_and_last_name(self):
+    def check_error_message_first_and_last_name(self, text):
         error = self.find(locc.error_fn_ln_loc)
-        assert error.text == 'First Name is not valid! Last Name is not valid!'
+        assert error.text == text
 
-    def confirm_password(self):
+    def different_passwords(self):
         first = self.find(locc.first_loc)
         last = self.find(locc.last_loc)
         email = self.find(locc.email_loc)
@@ -70,53 +70,41 @@ class CreateAccount(BasePage):
         last.send_keys('Mask')
         email.send_keys('123abc1234@gmail.com')
         password.send_keys('12345678mM+$VV')
-        conf_password.send_keys('12345678mM+$Vv')
+        conf_password.send_keys('12345678')
         button.click()
 
-    def check_confirm_password(self):
+    def check_message_confirm_password(self, text):
         conf_password_error = self.find(locc.conf_password_error_loc)
-        assert conf_password_error.text == 'Please enter the same value again.'
+        assert conf_password_error.text == text
 
-    def password_complexity_test(self):
-        first = self.find(locc.first_loc)
-        last = self.find(locc.last_loc)
-        email = self.find(locc.email_loc)
-        submit = self.find(locc.submit_loc)
-        first.send_keys('Elon')
-        last.send_keys('Mask')
-        email.send_keys('123abc123gmail.com')
-
+    def check_message_weak_password(self, text):
         password = self.find(locc.password_loc)
-        password.send_keys('1234567')
-        password_message_8_smb = self.find(locc.password_message_8_smb_loc)
-        assert password_message_8_smb.text == ('Minimum length of this field must be equal or greater than 8 symbols.'
-                                             ' Leading and trailing spaces will be ignored.')
-
         password.clear()
-        password.send_keys('12345678')
-        password_message_3_smb = self.find(locc.password_message_3_smb_loc)
-        assert password_message_3_smb.text == ('Minimum of different classes of characters in password is 3. '
-                                             'Classes of characters: Lower Case, Upper Case, Digits, Special Characters.')
-
-        password.clear()
-        password.send_keys('12345678mM')
+        password.send_keys('12345678m')
         password_message_weak = self.find(locc.password_message_weak_loc)
-        assert password_message_weak.text == 'Password Strength: Weak'
+        assert password_message_weak.text == text
 
+    def check_message_medium_password(self, text):
+        password = self.find(locc.password_loc)
         password.clear()
         password.send_keys('12345678mM+$')
         password_message_medium = self.find(locc.password_message_medium_loc)
-        assert password_message_medium.text == 'Password Strength: Medium'
+        assert password_message_medium.text == text
 
+    def check_message_strong_password(self, text):
+        password = self.find(locc.password_loc)
         password.clear()
         password.send_keys('12345678mM+$VV')
         password_message_strong = self.find(locc.password_message_strong_loc)
-        assert password_message_strong.text == 'Password Strength: Strong'
+        assert password_message_strong.text == text
 
-        submit.click()
-
+    def check_message_incorrect_email(self, text):
+        email = self.find(locc.email_loc)
+        email.send_keys('123abc123gmail.com')
+        button = self.find(locc.button_loc)
+        button.click()
         email_error = self.find(locc.email_error_loc)
-        assert email_error.text == 'Please enter a valid email address (Ex: johndoe@domain.com).'
+        assert email_error.text == text
 
 
 

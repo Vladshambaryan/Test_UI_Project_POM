@@ -13,15 +13,6 @@ class BasePage:
     def open_page(self):
         self.driver.get(f'{self.base_url}/{self.page_url}')
 
-    def open_page_bag(self):
-        self.driver.get(f'{self.base_url}/{self.bags_url}')
-
-    def open_page_jacket(self):
-        self.driver.get(f'{self.base_url}/{self.jacket_url}')
-
-    def open_page_shorts(self):
-        self.driver.get(f'{self.base_url}/{self.shorts_url}')
-
     def find(self, locator: tuple):
         return self.driver.find_element(*locator)
 

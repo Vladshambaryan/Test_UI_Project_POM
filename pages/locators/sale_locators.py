@@ -22,3 +22,6 @@ count_loc = (By.XPATH, "(//span[contains(@class,'counter qty')])[1]")
 
 select_size_loc = (By.XPATH, "//div[@id='super_attribute[93]-error']")
 select_color_loc = (By.XPATH, "//div[@id='super_attribute[143]-error']")
+
+delete_loc = (By.XPATH, "//a[@href='#'][contains(.,'Remove')]")
+alert_ok_loc = (By.XPATH, "//span[contains(.,'OK')]")
