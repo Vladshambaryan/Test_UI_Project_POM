@@ -1,0 +1,38 @@
+from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
+from pages.add_to_cart import AddToCart
+from pages.create_account_page import CreateAccount
+from pages.sing_in import LoginPage
+from pages.sale_page import SalePage
+import pytest
+
+
+@pytest.fixture()
+def driver():
+    options = Options()
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    chrome_driver = webdriver.Chrome(options=options)
+    chrome_driver.maximize_window()
+    chrome_driver.implicitly_wait(7)
+    return chrome_driver
+
+
+@pytest.fixture()
+def sale_page(driver):
+    return SalePage(driver)
+
+
+@pytest.fixture()
+def login_page(driver):
+    return LoginPage(driver)
+
+
+@pytest.fixture()
+def add_to_cart(driver):
+    return AddToCart(driver)
+
+
+@pytest.fixture()
+def create_account_page(driver):
+    return CreateAccount(driver)
