@@ -5,7 +5,7 @@ from pages.base_page import BasePage
 class CreateAccount(BasePage):
     page_url = 'customer/account/create/'
 
-    def fill_incorrect_first_name(self,  first, last, email, password, conf_password):
+    def fill_incorrect_data(self,  first, last, email, password, conf_password):
         first_field = self.find(locc.first_loc)
         last_field = self.find(locc.last_loc)
         email_field = self.find(locc.email_loc)
@@ -23,37 +23,9 @@ class CreateAccount(BasePage):
         error = self.find(locc.error_loc)
         assert error.text == text
 
-    def fill_incorrect_last_name(self,  first, last, email, password, conf_password):
-        first_field = self.find(locc.first_loc)
-        last_field = self.find(locc.last_loc)
-        email_field = self.find(locc.email_loc)
-        password_field = self.find(locc.password_loc)
-        conf_password_field = self.find(locc.conf_password_loc)
-        button = self.find(locc.button_loc)
-        first_field.send_keys(first)
-        last_field.send_keys(last)
-        email_field.send_keys(email)
-        password_field.send_keys(password)
-        conf_password_field.send_keys(conf_password)
-        button.click()
-
     def check_error_message_last_name(self, text):
         error = self.find(locc.error_ln_loc)
         assert error.text == text
-
-    def fill_incorrect_first_last_name(self,  first, last, email, password, conf_password):
-        first_field = self.find(locc.first_loc)
-        last_field = self.find(locc.last_loc)
-        email_field = self.find(locc.email_loc)
-        password_field = self.find(locc.password_loc)
-        conf_password_field = self.find(locc.conf_password_loc)
-        button = self.find(locc.button_loc)
-        first_field.send_keys(first)
-        last_field.send_keys(last)
-        email_field.send_keys(email)
-        password_field.send_keys(password)
-        conf_password_field.send_keys(conf_password)
-        button.click()
 
     def check_error_message_first_and_last_name(self, text):
         error = self.find(locc.error_fn_ln_loc)
@@ -68,20 +40,6 @@ class CreateAccount(BasePage):
     def check_message_incorrect_email(self, text):
         email_error = self.find(locc.email_error_loc)
         assert email_error.text == text
-
-    def fill_different_password(self,  first, last, email, password, conf_password):
-        first_field = self.find(locc.first_loc)
-        last_field = self.find(locc.last_loc)
-        email_field = self.find(locc.email_loc)
-        password_field = self.find(locc.password_loc)
-        conf_password_field = self.find(locc.conf_password_loc)
-        button = self.find(locc.button_loc)
-        first_field.send_keys(first)
-        last_field.send_keys(last)
-        email_field.send_keys(email)
-        password_field.send_keys(password)
-        conf_password_field.send_keys(conf_password)
-        button.click()
 
     def check_message_confirm_password(self, text):
         conf_password_error = self.find(locc.conf_password_error_loc)
