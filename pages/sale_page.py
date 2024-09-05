@@ -3,7 +3,6 @@ from pages.base_page import BasePage
 
 
 class SalePage(BasePage):
-    page_url = 'sale.html#'
     bags_url = 'gear/bags.html'
     jacket_url = 'women/tops-women/jackets-women.html?product_list_order=price"'
     shorts_url = 'men/bottoms-men/shorts-men.html'

@@ -3,9 +3,6 @@ from selenium.webdriver.remote.webdriver import WebDriver
 class BasePage:
     base_url = 'https://magento.softwaretestingboard.com'
     page_url = None
-    bags_url = None
-    jacket_url = None
-    shorts_url = None
 
     def __init__(self, driver: WebDriver):
         self.driver = driver

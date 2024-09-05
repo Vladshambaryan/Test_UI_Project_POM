@@ -17,4 +17,3 @@ def test_eco_friendly_page(eco_friendly_page):
     eco_friendly_page.check_visible_and_clickable()
     eco_friendly_page.check_product_size()
     eco_friendly_page.check_product_price()
-

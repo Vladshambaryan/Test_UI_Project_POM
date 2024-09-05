@@ -15,5 +15,3 @@ def test_add_to_cart(add_to_cart):
     add_to_cart.add_product_in_cart()
     add_to_cart.find_product_in_cart()
     add_to_cart.check_product_in_cart('Ana Running Short')
-
-

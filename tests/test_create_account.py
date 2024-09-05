@@ -40,27 +40,3 @@ def test_password_complexity(create_account_page):
     create_account_page.check_message_weak_password('Password Strength: Weak')
     create_account_page.check_message_medium_password('Password Strength: Medium')
     create_account_page.check_message_strong_password('Password Strength: Strong')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
