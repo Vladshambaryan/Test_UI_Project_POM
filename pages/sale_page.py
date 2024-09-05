@@ -4,11 +4,15 @@ from pages.base_page import BasePage
 
 class SalePage(BasePage):
     bags_url = 'gear/bags.html'
+    sale_url = 'sale.html'
     jacket_url = 'women/tops-women/jackets-women.html?product_list_order=price"'
     shorts_url = 'men/bottoms-men/shorts-men.html'
 
     def open_page_bag(self):
         self.driver.get(f'{self.base_url}/{self.bags_url}')
+
+    def open_page_sale(self):
+        self.driver.get(f'{self.base_url}/{self.sale_url}')
 
     def open_page_jacket(self):
         self.driver.get(f'{self.base_url}/{self.jacket_url}')

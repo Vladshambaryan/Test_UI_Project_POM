@@ -3,14 +3,14 @@ import pytest
 
 @pytest.mark.regression
 def test_sale_page(sale_page):
-    sale_page.open_page()
+    sale_page.open_page_sale()
     sale_page.click_jacket()
     sale_page.check_title('Jackets')
 
 
 @pytest.mark.regression
 def test_sale_bags(sale_page):
-    sale_page.open_page()
+    sale_page.open_page_sale()
     sale_page.click_bags()
     sale_page.check_bags_title('Bags')
 
