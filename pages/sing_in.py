@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 
 
 class LoginPage(BasePage):
-    page_url = 'sale.html'
+    page_url = 'customer/account/login'
 
     def fill_login_form(self, login, password):
         email_field = self.find(loc.email_field_loc)

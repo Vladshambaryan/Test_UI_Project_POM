@@ -1,14 +1,16 @@
 from selenium.webdriver.common.by import By
 
 
-short_loc = (By.XPATH, "//img[@alt='Ana Running Short']")
-add_to_cart_loc = (By.XPATH, "//span[contains(.,'Add to Cart')]")
-size_loc = (By.ID, "option-label-size-143-item-171")
-color_loc = (By.ID, "option-label-color-93-item-56")
-view_loc = (By.XPATH, "//span[contains(.,'View and Edit Cart')]")
-counter_loc = (By.XPATH, "//span[contains(@class,'counter-number')]")
-short1_loc = (By.XPATH, "(//a[contains(.,'Ana Running Short')])[2]")
-delete_loc = (By.XPATH, "//a[@href='#'][contains(.,'Remove item')]")
+price_filter_loc = (By.XPATH, "(//div[contains(.,'Price')])[13]")
+product_loc = (By.CSS_SELECTOR, ".price")
+products_loc = (By.CSS_SELECTOR, "li.product-item")
+price_range_loc = (By.XPATH, "//span[contains(.,'$29.99')]")
+filtered_loc = (By.XPATH, "(//p[@id='toolbar-amount'])[1]")
+search_results_loc = (By.XPATH, "(//p[contains(.,'3 Items')])[1]")
+sort_select_loc = (By.XPATH, "//select[@id='sorter']")
+products1_loc = (By.CSS_SELECTOR, "li.product-item")
+product_element_loc = (By.CSS_SELECTOR, "div.product-item-info .product-item-name")
+product_elements_loc = (By.CSS_SELECTOR, "div.product-item-info .swatch-attribute.size .swatch-option")
 
 
 

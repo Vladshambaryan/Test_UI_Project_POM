@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 
-
 sing_loc = (By.XPATH, "(//a[contains(.,'Sign In')])[1]")
 email_field_loc = (By.ID, "email")
 password_field_loc = (By.ID, 'pass')

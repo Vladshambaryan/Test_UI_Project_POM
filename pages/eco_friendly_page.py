@@ -1,69 +1,75 @@
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages.locators import sale_locators as loc
 from pages.locators import eco_friendly_locator as ecoloc
 from pages.base_page import BasePage
-
 
 class EcoFriendly(BasePage):
     page_url = 'collections/eco-friendly.html'
 
-    def open_page_eco_friendly(self):
+    def open_friendly_page(self):
         self.driver.get(f'{self.base_url}/{self.page_url}')
 
-    def select_product(self):
-        short = self.find(ecoloc.short_loc)
-        short.click()
-        size = self.find(ecoloc.size_loc)
-        size.click()
-        color = self.find(ecoloc.color_loc)
-        color.click()
-        add_to_cart = self.find(ecoloc.add_to_cart_loc)
-        add_to_cart.click()
+    def sort_by_price(self):
+        sort_select = self.find(ecoloc.sort_select_loc)
+        select = Select(sort_select)
+        select.select_by_value('price')
+        prices = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_all_elements_located((By.XPATH, "//span[@class='price']"))
+        )
+        price_values = []
+        for price in prices:
+            price.text.replace('$', '').replace(',', '')
+        assert price_values == sorted(price_values)
 
-    def find_product_in_cart(self):
-        WebDriverWait(self.driver, 5).until(
-            EC.text_to_be_present_in_element((By.XPATH, "//span[@class='counter-number']"), '1'))
-        self.find(ecoloc.counter_loc)
-        count = self.find(ecoloc.counter_loc)
-        count.click()
-        view = self.find(ecoloc.view_loc)
-        view.click()
+    def search_functionality(self):
+        search_box = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//input[@id='search']"))
+        )
+        search_box.send_keys("Eco-friendly")
+        search_box.send_keys(Keys.RETURN)
 
-    def check_product_in_cart(self, text):
-        short1 = self.find(ecoloc.short1_loc)
-        assert short1.text == text
+    def check_search_functionality(self, test):
+        search_results = self.find(ecoloc.search_results_loc)
+        assert search_results.text == test
 
-    def delete_product(self):
-        delete = self.find(ecoloc.delete_loc)
-        delete.click()
+    def filter_products_by_price(self):
+        price_filter = self.find(ecoloc.price_filter_loc)
+        price_filter.click()
+        price_range = self.find(ecoloc.price_range_loc)
+        price_range.click()
 
-    def check_product_count(self):
-        products = self.find_all(loc.products_loc)
+    def check_filter_products_by_price(self, text):
+        filtered = self.find(ecoloc.filtered_loc)
+        assert filtered.text == text
+
+    def check_product_count(self, count):
+        products = self.find_all(ecoloc.products_loc)
         product_count = len(products)
-        expected_count = product_count
-        assert product_count == expected_count
+        print(product_count)
+        assert product_count == count
 
     def check_visible_and_clickable(self):
-        products = self.find_all(loc.products_loc)
-        for index, product in enumerate(products):
+        products1 = self.find_all(ecoloc.products1_loc)
+        for index, product in enumerate(products1):
             is_clickable = self.driver.execute_script("return arguments[0].offsetParent !== null;", product)
-            assert is_clickable, f"Продукт {index + 1} не кликабелен."
-            print(f"Продукт {index + 1} кликабелен.")
+            assert is_clickable, 'The product is not clickable'
 
-    def check_product_price(self):
-        products1 = self.find_all(loc.products1_loc)
-        for index, product in enumerate(products1, start=1):
-            price_element = self.find(loc.product_loc)
-            assert price_element is not None, f"Цена не найдена для продукта {index}."
-            assert price_element.text != "", f"Цена для продукта {index} пуста."
-            print(f"Продукт {index} имеет цену: {price_element.text}")
+    def verification_product_prices(self, text):
+        price_elements = self.driver.find_elements(By.CSS_SELECTOR, "span.price")
+        product_prices = [price.text.replace("$", "") for price in price_elements if price.text.strip()]
+        assert product_prices == text
 
-    def check_product_size(self):
-        products1 = self.find_all(loc.products1_loc)
-        for index, product in enumerate(products1, start=1):
-            size_element = self.find(loc.prod_loc)
-            assert size_element is not None, f"Размер не найден для продукта {index}."
-            assert size_element.text != "", f"Размер для продукта {index} пуст."
-            print(f"Продукт {index} имеет размеры: {size_element.text}")
+    def verification_product_size(self, text):
+        product_elements = self.find_all(ecoloc.product_elements_loc)
+        product_sizes = [element.text for element in product_elements if element.text.strip()]
+        assert product_sizes == text
+
+    def verification_product_names(self, text):
+        product_element = self.find_all(ecoloc.product_element_loc)
+        product_names = [element.text for element in product_element]
+        assert product_names == text
+
+

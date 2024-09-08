@@ -1,6 +1,5 @@
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
-from pages.add_to_cart import AddToCart
 from pages.create_account_page import CreateAccount
 from pages.sing_in import LoginPage
 from pages.sale_page import SalePage
@@ -28,11 +27,6 @@ def sale_page(driver):
 @pytest.fixture()
 def login_page(driver):
     return LoginPage(driver)
-
-
-@pytest.fixture()
-def add_to_cart(driver):
-    return AddToCart(driver)
 
 
 @pytest.fixture()
