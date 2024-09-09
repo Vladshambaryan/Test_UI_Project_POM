@@ -7,10 +7,8 @@ from pages.locators import eco_friendly_locator as ecoloc
 from pages.base_page import BasePage
 
 class EcoFriendly(BasePage):
-    page_url = 'collections/eco-friendly.html'
 
-    def open_friendly_page(self):
-        self.driver.get(f'{self.base_url}/{self.page_url}')
+    friendly_page_url = 'collections/eco-friendly.html'
 
     def sort_by_price(self):
         sort_select = self.find(ecoloc.sort_select_loc)

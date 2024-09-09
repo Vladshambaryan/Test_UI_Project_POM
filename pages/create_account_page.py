@@ -3,7 +3,8 @@ from pages.base_page import BasePage
 
 
 class CreateAccount(BasePage):
-    page_url = 'customer/account/create/'
+
+    account_create_page_url = 'customer/account/create/'
 
     def fill_incorrect_data(self,  first, last, email, password, conf_password):
         first_field = self.find(locc.first_loc)

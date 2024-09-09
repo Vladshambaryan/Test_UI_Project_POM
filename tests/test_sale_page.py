@@ -3,7 +3,7 @@ import pytest
 
 @pytest.mark.regression
 def test_sale_page(sale_page):
-    sale_page.open_page_sale()
+    sale_page.open_sale_page()
     sale_page.check_title('Sale')
     sale_page.check_product_count()
     sale_page.check_visible_and_clickable()

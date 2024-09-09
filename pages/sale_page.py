@@ -1,15 +1,10 @@
 from pages.locators import sale_locators as loc
 from pages.base_page import BasePage
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 
 class SalePage(BasePage):
-    sale_url = 'sale.html'
 
-    def open_page_sale(self):
-        self.driver.get(f'{self.base_url}/{self.sale_url}')
+    sale_url = 'sale.html'
 
     def check_title(self, text):
         page_title = self.find(loc.page_title_loc)
