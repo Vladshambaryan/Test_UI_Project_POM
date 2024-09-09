@@ -22,11 +22,10 @@ class EcoFriendly(BasePage):
             price.text.replace('$', '').replace(',', '')
         assert price_values == sorted(price_values)
 
-    def search_functionality(self):
+    def enter_search_text(self, text):
         search_box = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//input[@id='search']"))
-        )
-        search_box.send_keys("Eco-friendly")
+            EC.presence_of_element_located((By.XPATH, "//input[@id='search']")))
+        search_box.send_keys(text)
         search_box.send_keys(Keys.RETURN)
 
     def check_search_functionality(self, test):

@@ -17,7 +17,7 @@ def test_eco_friendly_filter_products(eco_friendly_page):
 @pytest.mark.regression
 def test_search_functionality(eco_friendly_page):
     eco_friendly_page.open_friendly_page()
-    eco_friendly_page.search_functionality()
+    eco_friendly_page.enter_search_text("Eco-friendly")
     eco_friendly_page.check_search_functionality('3 Items')
 
 

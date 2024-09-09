@@ -2,12 +2,19 @@ import pytest
 
 
 @pytest.mark.regression
-def test_page_ana_running_short(ana_running_short_page):
+def test_clickable_elements_on_page(ana_running_short_page):
+    ana_running_short_page.open_ana_running_short_page()
+    ana_running_short_page.check_visible_and_clickable()
+    ana_running_short_page.add_to_compare()
+    ana_running_short_page.check_compare_list('You added product Ana Running Short to the comparison list.')
+
+
+@pytest.mark.regression
+def test_add_to_cart(ana_running_short_page):
     ana_running_short_page.open_ana_running_short_page()
     ana_running_short_page.add_product_to_cart()
     ana_running_short_page.check_count('1')
     ana_running_short_page.check_product_in_cart('Ana Running Short')
-
 
 
 @pytest.mark.regression
