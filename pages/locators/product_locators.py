@@ -15,3 +15,7 @@ products1_loc = (By.CSS_SELECTOR, "li.product-item")
 compare_loc = (By.XPATH, "(//span[contains(.,'Add to Compare')])[1]")
 comparision_list_loc = (By.XPATH, "(//div[contains(.,'You added product Ana Running Short to the comparison list.')])[6]")
 
+product_name_loc = (By.CSS_SELECTOR, "span[data-ui-id='page-title-wrapper']")
+product_price_loc = (By.CSS_SELECTOR, "span.price")
+available_sizes_loc = (By.CSS_SELECTOR, "div.swatch-attribute.size div.swatch-option")
+available_colors_loc = (By.CSS_SELECTOR, "div.swatch-attribute.color div.swatch-option")

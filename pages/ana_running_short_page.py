@@ -1,5 +1,3 @@
-from time import sleep
-
 from pages.locators import product_locators as prod
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -9,6 +7,24 @@ from pages.base_page import BasePage
 
 class AnaRunningShort(BasePage):
     ana_running_short_url = 'ana-running-short.html'
+
+    def check_product_name(self):
+        product_name = self.find(prod.product_name_loc).text
+        assert product_name == "Ana Running Short"
+
+    def check_product_price(self):
+        product_price = self.find(prod.product_price_loc).text
+        assert product_price == "$40.00"
+
+    def check_product_size(self):
+        available_sizes = self.find_all(prod.available_sizes_loc)
+        sizes = " ".join([size.get_attribute("aria-label") for size in available_sizes])
+        assert sizes == "28 29"
+
+    def check_product_color(self):
+        available_colors = self.find_all(prod.available_colors_loc)
+        colors = [color.get_attribute("aria-label") for color in available_colors]
+        assert "Black" in colors
 
     def add_to_compare(self):
         compare = self.find(prod.compare_loc)
@@ -51,4 +67,3 @@ class AnaRunningShort(BasePage):
         assert color_error.text == text
         size_error = self.find(prod.size_error_loc)
         assert size_error.text == text
-

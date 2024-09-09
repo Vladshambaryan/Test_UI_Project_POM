@@ -2,6 +2,15 @@ import pytest
 
 
 @pytest.mark.regression
+def test_test_product_properties(ana_running_short_page):
+    ana_running_short_page.open_ana_running_short_page()
+    ana_running_short_page.check_product_name()
+    ana_running_short_page.check_product_price()
+    ana_running_short_page.check_product_size()
+    ana_running_short_page.check_product_color()
+
+
+@pytest.mark.regression
 def test_clickable_elements_on_page(ana_running_short_page):
     ana_running_short_page.open_ana_running_short_page()
     ana_running_short_page.check_visible_and_clickable()
@@ -21,4 +30,3 @@ def test_add_to_cart(ana_running_short_page):
 def test_check_add_to_cart_with_out_selected_size_color(ana_running_short_page):
     ana_running_short_page.open_ana_running_short_page()
     ana_running_short_page.check_add_to_cart_with_out_selected_size_color('This is a required field.')
-
