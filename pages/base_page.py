@@ -7,7 +7,7 @@ class BasePage:
     friendly_page_url = None
     login_page_url = None
     account_create_page_url = None
-    add_to_cart_url = None
+    ana_running_short_url = None
 
     def __init__(self, driver: WebDriver):
         self.driver = driver
@@ -27,8 +27,8 @@ class BasePage:
     def open_login_page(self):
         self.driver.get(f'{self.base_url}/{self.login_page_url}')
 
-    def open_add_to_cart_page(self):
-        self.driver.get(f'{self.base_url}/{self.add_to_cart_url}')
+    def open_ana_running_short_page(self):
+        self.driver.get(f'{self.base_url}/{self.ana_running_short_url}')
 
     def find(self, locator: tuple):
         return self.driver.find_element(*locator)

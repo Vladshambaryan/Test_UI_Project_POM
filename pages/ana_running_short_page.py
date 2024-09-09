@@ -6,8 +6,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 
-class AddToCart(BasePage):
-    add_to_cart_url = 'ana-running-short.html'
+
+class AnaRunningShort(BasePage):
+    ana_running_short_url = 'ana-running-short.html'
+
+
+
 
     def add_product_to_cart(self):
         size = self.find(loc.size_loc)
@@ -37,6 +41,3 @@ class AddToCart(BasePage):
         size_error = self.find(loc.size_error_loc)
         assert size_error.text == text
 
-    def cart(self):
-        self.driver.get('https://magento.softwaretestingboard.com/checkout/cart/')
-        sleep(4)

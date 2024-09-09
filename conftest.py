@@ -2,7 +2,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from pages.create_account_page import CreateAccount
 from pages.sing_in import LoginPage
-from pages.add_to_cart_page import AddToCart
+from pages.ana_running_short_page import AnaRunningShort
 from pages.sale_page import SalePage
 from pages.eco_friendly_page import EcoFriendly
 import pytest
@@ -40,5 +40,5 @@ def eco_friendly_page(driver):
 
 
 @pytest.fixture()
-def add_to_cart_page(driver):
-    return AddToCart(driver)
+def ana_running_short_page(driver):
+    return AnaRunningShort(driver)
