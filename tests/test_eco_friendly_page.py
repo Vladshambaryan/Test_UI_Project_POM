@@ -4,7 +4,7 @@ import pytest
 @pytest.mark.regression
 def test_sort_by_price(eco_friendly_page):
     eco_friendly_page.open_friendly_page()
-    eco_friendly_page.sort_by_price()
+    eco_friendly_page.sort_by_price_and_check_correct_sort()
 
 
 @pytest.mark.regression

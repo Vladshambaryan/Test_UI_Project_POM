@@ -10,7 +10,7 @@ class EcoFriendly(BasePage):
 
     friendly_page_url = 'collections/eco-friendly.html'
 
-    def sort_by_price(self):
+    def sort_by_price_and_check_correct_sort(self):
         sort_select = self.find(ecoloc.sort_select_loc)
         select = Select(sort_select)
         select.select_by_value('price')

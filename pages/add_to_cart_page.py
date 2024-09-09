@@ -1,3 +1,5 @@
+from time import sleep
+
 from pages.locators import cart_locators as loc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -35,3 +37,6 @@ class AddToCart(BasePage):
         size_error = self.find(loc.size_error_loc)
         assert size_error.text == text
 
+    def cart(self):
+        self.driver.get('https://magento.softwaretestingboard.com/checkout/cart/')
+        sleep(4)
