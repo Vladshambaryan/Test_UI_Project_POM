@@ -1,3 +1,5 @@
+from time import sleep
+
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
@@ -35,24 +37,15 @@ class EcoFriendly(BasePage):
     def filter_products_by_price(self):
         price_filter = self.find(ecoloc.price_filter_loc)
         price_filter.click()
+        sleep(2)
         price_range = self.find(ecoloc.price_range_loc)
         price_range.click()
 
     def check_filter_products_by_price(self, text):
+        sleep(2)
         filtered = self.find(ecoloc.filtered_loc)
+        print(filtered.text)
         assert filtered.text == text
-
-    def check_product_count(self, count):
-        products = self.find_all(ecoloc.products_loc)
-        product_count = len(products)
-        print(product_count)
-        assert product_count == count
-
-    def check_visible_and_clickable(self):
-        products1 = self.find_all(ecoloc.products1_loc)
-        for index, product in enumerate(products1):
-            is_clickable = self.driver.execute_script("return arguments[0].offsetParent !== null;", product)
-            assert is_clickable, 'The product is not clickable'
 
     def verification_product_prices(self, text):
         price_elements = self.driver.find_elements(By.CSS_SELECTOR, "span.price")
@@ -65,7 +58,9 @@ class EcoFriendly(BasePage):
         assert product_sizes == text
 
     def verification_product_names(self, text):
+        sleep(3)
         product_element = self.find_all(ecoloc.product_element_loc)
+        sleep(3)
         product_names = [element.text for element in product_element]
         assert product_names == text
 

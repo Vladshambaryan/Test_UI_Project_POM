@@ -1,3 +1,5 @@
+from time import sleep
+
 from pages.locators import create_account_locators as locc
 from pages.base_page import BasePage
 
@@ -29,7 +31,9 @@ class CreateAccount(BasePage):
         assert error.text == text
 
     def check_error_message_first_and_last_name(self, text):
+        sleep(6)
         error = self.find(locc.error_fn_ln_loc)
+        print(error.text)
         assert error.text == text
 
     def fill_incorrect_email(self, email):

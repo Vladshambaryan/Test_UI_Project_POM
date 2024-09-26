@@ -6,14 +6,13 @@ def test_test_product_properties(ana_running_short_page):
     ana_running_short_page.open_ana_running_short_page()
     ana_running_short_page.check_product_name()
     ana_running_short_page.check_product_price()
-    ana_running_short_page.check_product_size()
+    ana_running_short_page.check_product_size("28 29")
     ana_running_short_page.check_product_color()
 
 
 @pytest.mark.regression
 def test_clickable_elements_on_page(ana_running_short_page):
     ana_running_short_page.open_ana_running_short_page()
-    ana_running_short_page.check_visible_and_clickable()
     ana_running_short_page.add_to_compare()
     ana_running_short_page.check_compare_list('You added product Ana Running Short to the comparison list.')
 

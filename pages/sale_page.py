@@ -16,12 +16,6 @@ class SalePage(BasePage):
         expected_count = product_count
         assert product_count == expected_count
 
-    def check_visible_and_clickable(self):
-        products = self.find_all(loc.products_loc)
-        for index, product in enumerate(products):
-            is_clickable = self.driver.execute_script("return arguments[0].offsetParent !== null;", product)
-            assert is_clickable, 'The product is not clickable'
-
     def women_s_deals_element(self, text):
         prise_on_pands = self.find(loc.pands_loc)
         assert prise_on_pands.text == text

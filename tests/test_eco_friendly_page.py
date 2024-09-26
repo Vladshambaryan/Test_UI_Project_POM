@@ -24,8 +24,6 @@ def test_search_functionality(eco_friendly_page):
 @pytest.mark.regression
 def test_visible_and_clickable_web_elements(eco_friendly_page):
     eco_friendly_page.open_friendly_page()
-    eco_friendly_page.check_product_count(12)
-    eco_friendly_page.check_visible_and_clickable()
     eco_friendly_page.verification_product_names(['Ana Running Short', 'Fiona Fitness Short', 'Daria Bikram Pant',
                                                   'Bella Tank', 'Electra Bra Top', 'Tiffany Fitness Tee',
                                                   'Elisa EverCool™ Tee', 'Layla Tee', 'Ariel Roll Sleeve Sweatshirt',

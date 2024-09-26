@@ -1,3 +1,5 @@
+from time import sleep
+
 from pages.locators import sing_in_locators as loc
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -22,7 +24,16 @@ class LoginPage(BasePage):
         sing.click()
 
     def check_text_is(self, text):
-        WebDriverWait(self.driver, 3).until(
+        sleep(3)
+        WebDriverWait(self.driver, 6).until(
             EC.presence_of_all_elements_located((By.XPATH, "(//span[@class='logged-in'])[1]")))
         welcome = self.find(loc.welcome_loc)
         assert welcome.text == text
+        print(welcome.text)
+
+    def check_error_text(self, text):
+        sleep(3)
+        welcome = self.driver.find_element(By.XPATH, "//div[@data-bind='html: $parent.prepareMessageForHtml(message.text)']")
+        sleep(1)
+        assert welcome.text == text
+

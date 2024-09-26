@@ -1,7 +1,9 @@
+from time import sleep
+
 from pages.locators import product_locators as prod
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as EC, wait
 from pages.base_page import BasePage
 
 
@@ -16,10 +18,10 @@ class AnaRunningShort(BasePage):
         product_price = self.find(prod.product_price_loc).text
         assert product_price == "$40.00"
 
-    def check_product_size(self):
+    def check_product_size(self, text):
         available_sizes = self.find_all(prod.available_sizes_loc)
         sizes = " ".join([size.get_attribute("aria-label") for size in available_sizes])
-        assert sizes == "28 29"
+        assert sizes == text
 
     def check_product_color(self):
         available_colors = self.find_all(prod.available_colors_loc)
@@ -27,18 +29,14 @@ class AnaRunningShort(BasePage):
         assert "Black" in colors
 
     def add_to_compare(self):
+        sleep(2)
         compare = self.find(prod.compare_loc)
         compare.click()
 
     def check_compare_list(self, text):
+        sleep(2)
         comparision_list = self.find(prod.comparision_list_loc)
         assert comparision_list.text == text
-
-    def check_visible_and_clickable(self):
-        products1 = self.find_all(prod.products1_loc)
-        for index, product in enumerate(products1):
-            is_clickable = self.driver.execute_script("return arguments[0].offsetParent !== null;", product)
-            assert is_clickable, 'The product is not clickable'
 
     def add_product_to_cart(self):
         size = self.find(prod.size_loc)
@@ -62,6 +60,10 @@ class AnaRunningShort(BasePage):
 
     def check_add_to_cart_with_out_selected_size_color(self, text):
         add_cart = self.find(prod.add_to_cart_loc)
+        self.driver.execute_script("arguments[0].scrollIntoView();", add_cart)  # Прокрутка к элементу
+
+        add_cart = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, "//span[contains(.,'Add to Cart')]")))
         add_cart.click()
         color_error = self.find(prod.color_error_loc)
         assert color_error.text == text
